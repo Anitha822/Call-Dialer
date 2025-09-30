@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Phone Dialer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f2f2f2;
+    }
+    .dialer {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 250px;
+    }
+    #display {
+      font-size: 20px;
+      margin-bottom: 15px;
+      min-height: 30px;
+      border: 1px solid #ccc;
+      padding: 8px;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+    .keys {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .key {
+      padding: 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #e0e0e0;
+      cursor: pointer;
+    }
+    .key:active {
+      background: #ccc;
+    }
+    .call {
+      background: #0e3367;
+      color: white;
+      font-size: 18px;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+      cursor: pointer;
+    }
+    .call:active {
+      background: #0b3359;
+    }
+  </style>
+</head>
+<body>
+  <div class="dialer">
+    <div id="display"></div>
+    <div class="keys">
+      <button class="key">1</button>
+      <button class="key">2</button>
+      <button class="key">3</button>
+      <button class="key">4</button>
+      <button class="key">5</button>
+      <button class="key">6</button>
+      <button class="key">7</button>
+      <button class="key">8</button>
+      <button class="key">9</button>
+      <button class="key">*</button>
+      <button class="key">0</button>
+      <button class="key">#</button>
+    </div>
+    <button class="call" id="callBtn"> Call</button>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+    const keys = document.querySelectorAll(".key");
+    const callBtn = document.getElementById("callBtn");
+    let number = "";
+
+    keys.forEach(key => {
+      key.addEventListener("click", () => {
+        number += key.textContent;
+        display.textContent = number;
+      });
+    });
+
+    callBtn.addEventListener("click", () => {
+      if(number){
+        window.location.href = "tel:" + number;
+      } else {
+        alert("Enter a number first!");
+      }
+    });
+  </script>
+</body>
+</html>
