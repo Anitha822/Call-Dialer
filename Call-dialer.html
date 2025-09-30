@@ -64,7 +64,7 @@
 </head>
 <body>
   <div class="dialer">
-    <div id="display"></div>
+    <div id="display">+91</div>
     <div class="keys">
       <button class="key">1</button>
       <button class="key">2</button>
@@ -75,33 +75,50 @@
       <button class="key">7</button>
       <button class="key">8</button>
       <button class="key">9</button>
-      <button class="key">*</button>
-      <button class="key">0</button>
       <button class="key">#</button>
+      <button class="key">0</button>
+      <button class="key" id="backspace">x</button>
+      
     </div>
-    <button class="call" id="callBtn"> Call</button>
+    <button class="call" id="callBtn">Call</button>
   </div>
 
   <script>
     const display = document.getElementById("display");
     const keys = document.querySelectorAll(".key");
     const callBtn = document.getElementById("callBtn");
-    let number = "";
+    const backspaceBtn = document.getElementById("backspace");
+
+    
+    let number = "+91 ";
+    display.textContent = number;
 
     keys.forEach(key => {
-      key.addEventListener("click", () => {
-        number += key.textContent;
-        display.textContent = number;
-      });
+      if (key.id !== "backspace") {
+        key.addEventListener("click", () => {
+          number += key.textContent;
+          display.textContent = number;
+        });
+      }
     });
 
+    
+    backspaceBtn.addEventListener("click", () => {
+      if (number.length > 3) { 
+        number = number.slice(0, -1);
+        display.textContent = number;
+      }
+    });
+
+    
     callBtn.addEventListener("click", () => {
-      if(number){
+      if (number && number !== "+91 ") {
         window.location.href = "tel:" + number;
       } else {
-        alert("Enter a number first!");
+        alert("Enter a number after +91!");
       }
     });
   </script>
 </body>
 </html>
+
